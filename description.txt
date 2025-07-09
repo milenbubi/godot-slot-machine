@@ -1,0 +1,27 @@
+Hi!
+This is Elysium's frontend new hire test.
+
+Please use Godot to create a simple slot machine. In the "Assets" folder you can find some materials which you can use.
+
+Required features:
+1) Spinning slot tiles
+2) Show win lines
+3) Use bitmap font to show wins
+4) WebGL export
+
+Bonus tasks:
+1) Implement marsienne twister to generate combinations
+2) Pretty winline effects with particles
+3) Export under 15mb
+4) Accurate RTP
+5) Separate backend system which communicates with the frontend via POST/GET
+6) Interesting, non standard features and ways to win money (be creative!)
+7) Support different languages, loading them separately from the game. Extra bonus points for being able to switch any asset and not just text.
+8) Pretty GIT history
+
+There is no time limit. The Bonus Tasks are optional - a good implementation of the base features is much better than having everything done but sloppily.
+If you have any questions or doubts, feel free to contact.
+
+Good luck!
+c [ose 159
+
