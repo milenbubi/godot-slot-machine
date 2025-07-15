@@ -11,5 +11,16 @@ config_version=5
 [application]
 
 config/name="Elysium"
+run/main_scene="uid://dm42n7qbccron"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+DiamondAssets="*res://scripts/diamond_assets.gd"
+Constants="*res://scripts/constants.gd"
+
+[display]
+
+window/size/viewport_width=1006
+window/size/viewport_height=748
