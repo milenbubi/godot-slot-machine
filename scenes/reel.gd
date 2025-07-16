@@ -47,7 +47,9 @@ func _process(delta):
 		for symbol in reel_textures:
 			symbol.position.y += offset
 		
-		for symbol in reel_textures:
+		#for symbol in reel_textures:
+		for i in range(reel_textures.size() - 1, -1, -1):
+			var symbol = reel_textures[i]
 			# if the symbol goes out of the reel at the bottom, move it back to the top
 			if symbol.position.y >= reel_height:
 				# move it to the very top
