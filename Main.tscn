@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dm42n7qbccron"]
+[gd_scene load_steps=7 format=3 uid="uid://dm42n7qbccron"]
 
 [ext_resource type="Texture2D" uid="uid://6a0g5of5mwox" path="res://assets/BackgroundBlur.png" id="1_glv2v"]
-[ext_resource type="Script" uid="uid://bb0tmi30c0s7x" path="res://h_box_container.gd" id="2_r0du0"]
+[ext_resource type="Script" uid="uid://8uoln4h224c1" path="res://scenes/reels_container.gd" id="2_3dxm6"]
+[ext_resource type="Script" uid="uid://bb0tmi30c0s7x" path="res://scenes/reels.gd" id="2_r0du0"]
+[ext_resource type="Texture2D" uid="uid://s3fwen3pdoje" path="res://assets/button/ButtonNormal.png" id="3_3dxm6"]
+[ext_resource type="Texture2D" uid="uid://c3rrdfsw8k8ro" path="res://assets/button/ButtonPressed.png" id="4_lgr22"]
+[ext_resource type="Texture2D" uid="uid://bek58ukysus4r" path="res://assets/button/ButtonHover.png" id="5_trn2v"]
 
 [node name="Main" type="Control"]
+clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,8 +42,9 @@ offset_right = 325.0
 offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_3dxm6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ReelsContainer"]
+[node name="Reels" type="HBoxContainer" parent="ReelsContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,3 +52,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_r0du0")
+
+[node name="SpinButton" type="TextureButton" parent="ReelsContainer"]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 514.0
+offset_right = 482.0
+offset_bottom = 610.0
+texture_normal = ExtResource("3_3dxm6")
+texture_pressed = ExtResource("4_lgr22")
+texture_hover = ExtResource("5_trn2v")
+ignore_texture_size = true
+stretch_mode = 4

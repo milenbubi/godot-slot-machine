@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-DiamondAssets="*res://scripts/diamond_assets.gd"
-Constants="*res://scripts/constants.gd"
+DiamondAssets="*res://globalscripts/diamond_assets.gd"
+Constants="*res://globalscripts/constants.gd"
 
 [display]
 

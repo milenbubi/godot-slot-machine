@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-var reel_scene = preload("res://reel.tscn")
+var reel_scene = preload("res://scenes/reel.tscn")
 
 
 func _ready() -> void:

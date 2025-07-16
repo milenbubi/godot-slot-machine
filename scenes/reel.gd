@@ -1,4 +1,5 @@
 extends Control
+signal spin_finished(names)
 
 @export var reel_index: int = 0
 var reel_textures: Array[Control] = []
@@ -21,7 +22,6 @@ func _ready():
 	spin_speed = closest_multiple / Constants.SPIN_DURATION
 
 	set_initial_reel_symbols()
-	start_spin()
 
 
 func start_spin():
@@ -31,7 +31,7 @@ func start_spin():
 
 func stop_spin():
 	spinning = false
-
+	emit_signal("spin_finished", get_visible_symbol_names())
 
 func _process(delta):
 	if spinning:
@@ -57,7 +57,10 @@ func _process(delta):
 				# change its texture
 				var sprite = symbol.get_child(0) as Sprite2D
 				sprite.texture = DiamondAssets.diamond_sprites[randi() % DiamondAssets.diamond_sprites.size()]
-
+				
+				# Rotate the array by moving the last element to the front (simulate a shift)
+				var last = reel_textures.pop_back()
+				reel_textures.insert(0, last)
 		if spin_timer >= Constants.SPIN_DURATION:
 			stop_spin()
 
@@ -77,8 +80,6 @@ func get_max_symbol_y() -> float:
 
 
 func set_initial_reel_symbols():
-	var parent_size = get_parent().size
-
 	# Create REEL_SYMBOLS_COUNT + 2 for buffer
 	for i in range(-2, Constants.REEL_SYMBOLS_COUNT):
 		var container = create_symbol(i)  # Offset to create a buffer at the top
@@ -96,8 +97,8 @@ func create_symbol(index: int) -> Control:
 
 	var sprite = Sprite2D.new()
 	sprite.texture = random_texture
-
-# Scale the sprite to fit its parent container
+	
+	# Scale the sprite to fit its parent container
 	var texture_height = sprite.texture.get_height()
 	var texture_width = sprite.texture.get_width()
 	var scale_factor_y = symbol_height / texture_height
@@ -108,3 +109,16 @@ func create_symbol(index: int) -> Control:
 
 	container.add_child(sprite)
 	return container
+
+
+func get_visible_symbol_names() -> Dictionary:
+	var names: Array[String] = []
+
+	for i in range(2,Constants.REEL_SYMBOLS_COUNT +2):  # visible indices 2, 3, 4
+		var sprite = reel_textures[i].get_child(0) as Sprite2D
+		names.append(sprite.texture.get_meta("symbol_name"))
+
+	return {
+	"names":names,
+	"reel_index": reel_index
+}

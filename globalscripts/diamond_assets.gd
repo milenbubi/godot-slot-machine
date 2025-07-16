@@ -16,6 +16,8 @@ func load_assets():
 		while file_name != "":
 			if file_name.ends_with(".png") and file_name.begins_with("SC_Symbols_"):
 				var texture = load("res://assets/" + file_name)
+				texture.set_meta("symbol_name", file_name.replace(".png", ""))
+
 				diamond_sprites.append(texture)
 				print("✅ Asset Loaded: ", file_name)
 			file_name = dir.get_next()
