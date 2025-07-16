@@ -32,8 +32,8 @@ func _on_spin_button_pressed():
 	spin_button.modulate.a = 0.7
 	reels_stopped = 0
 	
-	var wins_display = self.get_node("WinDisplay")
-	if wins_display:
+	if self.has_node("WinDisplay"):
+		var wins_display = self.get_node("WinDisplay")
 		remove_child(wins_display)
 		wins_display.queue_free()
 	
@@ -60,29 +60,29 @@ func _on_reel_spin_finished(data: Dictionary):
 		
 		
 func showWins():
-	var results = []  # ще държи всички намерени печеливши линии
+	var results = []  # will hold all found winning lines
 
 	for row_index in range(win_lines.size()):
 		var row = win_lines[row_index]
 		var current_symbol = row[0]
-		var streak = 1  # колко поредни съвпадения имаме
+		var streak = 1  # how many consecutive matches we have
 
 		for col in range(1, row.size()):
 			if row[col] == current_symbol and current_symbol != null:
 				streak += 1
 			else:
-				# проверка дали streak-а е достатъчен
+				# check if the streak is sufficient
 				if streak >= 3:
 					results.append({
 						"symbol": current_symbol,
 						"count": streak,
 						"row": row_index
 					})
-				# рестартираме streak-а
+				# restart streak
 				current_symbol = row[col]
 				streak = 1
 
-		# проверка за streak в края на реда
+		# check for streak at the end of the row
 		if streak >= 3:
 			results.append({
 				"symbol": current_symbol,
@@ -90,20 +90,20 @@ func showWins():
 				"row": row_index
 			})
 
-	print(results)
-	print()
 	var total_win = 0
 	for item in results:
 		total_win += item["count"] * 100
 	
+	print()
+	print("Win Lines: ", results)
+	print("Total win: ", total_win)	
+	
 	if total_win == 0:
-		pass
-		#return
+		return
 	
 	var win_display = preload("res://scenes/win_display.tscn").instantiate()
 	add_child(win_display)
 
-	print("Total win:", total_win)	
 	var wins_container = win_display.get_node("WinContainer")
-	wins_container.show_number(total_win+300)
+	wins_container.show_number(total_win)
 	
