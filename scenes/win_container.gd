@@ -8,7 +8,7 @@ func _gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		is_faded = !is_faded
 		for child in get_children():
-			child.modulate.a = 0.3 if is_faded else 1.0
+			child.modulate.a = 0.2 if is_faded else 1.0
 
 		
 func clear_digits_container():
